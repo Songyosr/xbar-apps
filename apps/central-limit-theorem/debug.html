@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLT Debug</title>
+</head>
+<body>
+    <div id="debug-info"></div>
+    <div id="clt-app-root"></div>
+    
+    <!-- Load modules one by one to debug -->
+    <script src="../../shared/engine-core.js"></script>
+    <script src="../../shared/rendering-utils.js"></script>
+    <script src="../../shared/gesture-handler.js"></script>
+    <script src="../../shared/clt-enhanced.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const debugInfo = document.getElementById('debug-info');
+            
+            // Check if modules loaded
+            const checks = {
+                'StatUtils': typeof window.StatUtils !== 'undefined',
+                'StatEngine': typeof window.StatEngine !== 'undefined', 
+                'RenderUtils': typeof window.RenderUtils !== 'undefined',
+                'GestureHandler': typeof window.GestureHandler !== 'undefined',
+                'CentralLimitTheoremLab': typeof window.CentralLimitTheoremLab !== 'undefined'
+            };
+            
+            let debugText = '<h3>Module Loading Status:</h3><ul>';
+            for (const [name, loaded] of Object.entries(checks)) {
+                debugText += `<li>${name}: ${loaded ? '✅ Loaded' : '❌ Failed'}</li>`;
+            }
+            debugText += '</ul>';
+            
+            debugInfo.innerHTML = debugText;
+            
+            // Try to initialize if all modules loaded
+            if (Object.values(checks).every(v => v)) {
+                try {
+                    const CLTApp = window.CentralLimitTheoremLab();
+                    CLTApp.mount('clt-app-root');
+                    debugInfo.innerHTML += '<p>✅ App initialized successfully</p>';
+                } catch (error) {
+                    debugInfo.innerHTML += `<p>❌ App initialization failed: ${error.message}</p>`;
+                    console.error('CLT App Error:', error);
+                }
+            } else {
+                debugInfo.innerHTML += '<p>❌ Cannot initialize - missing modules</p>';
+            }
+        });
+    </script>
+</body>
+</html>

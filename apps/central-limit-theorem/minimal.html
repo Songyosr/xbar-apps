@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal CLT - Stat Applet Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Inter', sans-serif; margin: 0; padding: 1rem; background: #fff;">
+    
+    <header style="background: #FFF7EB; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+        <a href="../../" style="color: #15616D; text-decoration: none; font-weight: 600;">← Back to Stat Applet Lab</a>
+        <h1 style="margin: 0.5rem 0; color: #001524;">Central Limit Theorem Lab</h1>
+        <p style="margin: 0; color: #6B7280;">Explore how sample statistics behave as sample size changes</p>
+    </header>
+    
+    <div id="app-container">
+        <div style="text-align: center; padding: 2rem; background: #F9FAFB; border-radius: 8px;">
+            <h2>Loading Central Limit Theorem Simulation...</h2>
+            <p id="status">Initializing...</p>
+        </div>
+    </div>
+    
+    <!-- Use the working complete version -->
+    <script src="../../shared/clt-complete.js"></script>
+    
+    <script>
+        console.log('Minimal CLT starting...');
+        
+        function updateStatus(message) {
+            const statusEl = document.getElementById('status');
+            if (statusEl) statusEl.textContent = message;
+            console.log(message);
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStatus('DOM loaded, checking for CLT component...');
+            
+            // Check if component is available
+            if (typeof window.CentralLimitTheoremLab === 'undefined') {
+                updateStatus('❌ CentralLimitTheoremLab not found');
+                return;
+            }
+            
+            updateStatus('✅ Component found, initializing...');
+            
+            try {
+                const CLTApp = window.CentralLimitTheoremLab();
+                updateStatus('✅ Component created, mounting...');
+                
+                // Clear the container and mount
+                const container = document.getElementById('app-container');
+                container.innerHTML = '<div id="clt-root"></div>';
+                
+                CLTApp.mount('clt-root');
+                updateStatus('✅ CLT Lab loaded successfully!');
+                
+            } catch (error) {
+                updateStatus(`❌ Error: ${error.message}`);
+                console.error('CLT Error:', error);
+            }
+        });
+    </script>
+</body>
+</html>

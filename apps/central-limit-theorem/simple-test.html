@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple CLT Test</title>
+</head>
+<body>
+    <h1>CLT Simple Test</h1>
+    <div id="test-output"></div>
+    <div id="clt-app-root"></div>
+    
+    <script>
+        console.log('Starting simple test...');
+        
+        // Test basic functionality
+        document.getElementById('test-output').innerHTML = '<p>✅ Basic HTML loaded</p>';
+        
+        // Try to load the working component
+        const script = document.createElement('script');
+        script.src = '../../shared/clt-working.js';
+        script.onload = function() {
+            console.log('✅ Script loaded successfully');
+            document.getElementById('test-output').innerHTML += '<p>✅ Script loaded</p>';
+            
+            // Check if the component is available
+            if (typeof window.CentralLimitTheoremLab !== 'undefined') {
+                console.log('✅ CentralLimitTheoremLab found');
+                document.getElementById('test-output').innerHTML += '<p>✅ Component found</p>';
+                
+                try {
+                    const CLTApp = window.CentralLimitTheoremLab();
+                    console.log('✅ Component instantiated');
+                    document.getElementById('test-output').innerHTML += '<p>✅ Component instantiated</p>';
+                    
+                    CLTApp.mount('clt-app-root');
+                    console.log('✅ Component mounted');
+                    document.getElementById('test-output').innerHTML += '<p>✅ Component mounted successfully!</p>';
+                } catch (error) {
+                    console.error('❌ Mount error:', error);
+                    document.getElementById('test-output').innerHTML += `<p>❌ Mount error: ${error.message}</p>`;
+                }
+            } else {
+                console.error('❌ CentralLimitTheoremLab not found');
+                document.getElementById('test-output').innerHTML += '<p>❌ Component not found</p>';
+            }
+        };
+        script.onerror = function() {
+            console.error('❌ Script failed to load');
+            document.getElementById('test-output').innerHTML += '<p>❌ Script failed to load</p>';
+        };
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>
