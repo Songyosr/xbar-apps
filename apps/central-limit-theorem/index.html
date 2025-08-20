@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Limit Theorem Lab - Stat Applet Lab</title>
+    <meta name="description" content="Explore how sample statistics behave as sample size changes with this interactive CLT visualization">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- XBAR Applet styles (minimal, distraction-free) -->
+    <link rel="stylesheet" href="../../shared/xbar-applets.css">
+</head>
+<body>
+    <div id="xbar-banner"></div>
+    <div class="applet-wrap">
+        <div id="clt-app-root"></div>
+    </div>
+    
+    <!-- Reusable banner injection -->
+    <script src="../../shared/banner.js"></script>
+    <!-- Load the Working CLT Component (fallback while debugging modular approach) -->
+    <script src="../../shared/clt-complete.js"></script>
+    
+    <script>
+        // Initialize the CLT app when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                console.log('Loading CLT app...');
+                if (window.CentralLimitTheoremLab) {
+                    const CLTApp = window.CentralLimitTheoremLab();
+                    CLTApp.mount('clt-app-root');
+                    console.log('CLT App loaded successfully');
+                } else {
+                    throw new Error('CentralLimitTheoremLab not found');
+                }
+            } catch (error) {
+                console.error('Failed to initialize CLT App:', error);
+                document.body.innerHTML += '<div style="color: red; padding: 2rem; text-align: center;">Error loading CLT App: ' + error.message + '</div>';
+            }
+        });
+    </script>
+</body>
+</html>

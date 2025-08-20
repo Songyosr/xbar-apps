@@ -1,0 +1,111 @@
+/* XBAR Applets Minimal Styling */
+/* Clean, distraction-free styling for applet pages */
+
+/* Design tokens for applets */
+:root {
+  --ink: #001524;
+  --navy: #15616D;
+  --orange: #FF7D00;
+  --info: #475569;
+  --ticks: #EAECEF;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', monospace;
+}
+
+/* Base reset */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { 
+  margin: 0; 
+  font-family: var(--font-sans); 
+  background: #FFFFFF; 
+  color: var(--ink); 
+  line-height: 1.6; 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Applet container */
+.applet-wrap { 
+  min-height: 100vh; 
+  width: 100%; 
+}
+
+/* Banner styles (shared across applets) */
+.xbar-banner { 
+  background: #fff; 
+  border-bottom: 1px solid var(--ticks);
+}
+
+.xbar-banner .container-1140 { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 0.75rem; 
+  max-width: 1400px; 
+  margin: 0 auto;
+}
+
+.brand-xbar { 
+  font-weight: 800; 
+  color: var(--ink); 
+  letter-spacing: -0.01em; 
+  text-decoration: none; 
+  display: inline-flex; 
+  align-items: center; 
+  font-size: 1.6rem; 
+  line-height: 1;
+}
+
+@media (min-width: 768px) { 
+  .brand-xbar { 
+    font-size: 1.9rem; 
+  } 
+}
+
+.brand-xbar .br-l { 
+  color: var(--navy); 
+}
+
+.brand-xbar .br-r { 
+  color: var(--orange); 
+}
+
+.xbar-nav { 
+  list-style: none; 
+  display: flex; 
+  gap: 1rem; 
+  margin: 0; 
+  padding: 0; 
+}
+
+.xbar-nav a { 
+  color: var(--info); 
+  text-decoration: none; 
+  font-weight: 600; 
+  font-size: 0.95rem; 
+}
+
+.xbar-nav a:hover { 
+  color: var(--orange); 
+}
+
+/* Minimal canvas/applet container styling */
+.canvas-container {
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Basic typography for applet content */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+p {
+  color: var(--info);
+}
+
+code {
+  font-family: var(--font-mono);
+}
