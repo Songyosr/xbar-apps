@@ -1,0 +1,28 @@
+name: Deploy Applets to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy static files
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+          enable_jekyll: false
+          force_orphan: true
+          exclude_assets: |
+            .github
+            README.md
+            LICENSE
+            .gitignore
