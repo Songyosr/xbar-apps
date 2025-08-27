@@ -1,1 +1,10 @@
+# Archive directories - legacy development files
+archive/
+*/archive/
+
+# Development files
+*.log
 .DS_Store
+
+# Node modules if any applets use npm
+node_modules/
